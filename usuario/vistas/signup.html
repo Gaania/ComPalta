@@ -2,21 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/form.css">
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="form.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Regístrate</title>
 </head>
 <body>
-    <form action="../back/signup.php" method="get">
-        <p>Nombre de usuario</p>
-        <input type="text" name="nombre" id="nombre" placeholder="" required>
-        <p>Correo</p>
-        <input type="email" name="correo" id="correo" placeholder="" required>
-        <p>Contraseña</p>
-        <input type="text" name="clave" id="clave" placeholder="" required>
-        <p>Vuelve a escribir la contraseña</p>
-        <input type="text" name="clave2" id="clave2" placeholder="" required>
-        <input type="submit"><input type="reset">
-    </form>
+
+        <div class="caja">
+            <form class="formulario" action="../back/signup.php" method="get">
+                <span class="titulo">Regístrate</span>
+                <div class="forminput">
+                    
+                    <input type="text" class="input" name="nombre" id="nombre" maxlength="15" minlength="4" placeholder="Nombre de usuario" required>
+                    
+                    <input type="email" class="input" name="correo" id="correo" maxlength="50" minlength="10" placeholder="Correo" required>
+                    
+                    <input type="text" class="input" name="clave" id="clave" maxlength="12" minlength="8" placeholder="Contraseña" required>
+                    
+                    <input type="text" class="input" name="clave2" id="clave2" maxlength="12" minlength="8" placeholder="Repite la contraseña" required>
+
+                </div>
+
+                    <input class="boton"  type="submit">
+                
+            </form>
+            <div class="seccion">
+                <p>¿Tienes una cuenta? <a href="">Inicia sesión</a></p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

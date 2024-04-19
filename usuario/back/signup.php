@@ -17,8 +17,8 @@ if (isset($_GET)){
         exit();
     }
 
-    if((strlen($nombre)<=3) or (strlen($nombre)>=21)){
-        echo "<script>alert('ERROR: Su nombre de usuario debe tener entre 4 y 20 caracteres.');window.location='';</script>";
+    if((strlen($nombre)<=3) or (strlen($nombre)>=16)){
+        echo "<script>alert('ERROR: Su nombre de usuario debe tener entre 4 y 15 caracteres.');window.location='';</script>";
         exit();
     }
 
