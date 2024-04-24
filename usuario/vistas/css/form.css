@@ -8,7 +8,7 @@ html{
     background: #fef7f1;
     overflow: hidden;
     border-radius: 16px;
-    margin: 2% 35%;
+    margin: 3.5% 35%;
     width: 30%;
     box-shadow: #0f4020;
     box-shadow: -12px 10px 45px 4px rgba(0,0,0,0.42);
@@ -26,7 +26,7 @@ html{
   
   .titulo {
     font-weight: bold;
-    font-size: 1.6rem;
+    font-size: 1.9rem;
     color:#0f4020;
       }
   
