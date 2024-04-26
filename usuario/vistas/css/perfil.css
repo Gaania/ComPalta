@@ -1,0 +1,38 @@
+html{
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.grid{
+    width: 100vw;
+    height: 100vh;
+    background-color: blueviolet;
+
+    display: grid;
+    grid-template-columns: 20% auto;
+    grid-template-rows: 5% auto;
+    grid-template-columns: 20% auto;
+    grid-template-rows: 5% auto;
+}
+
+.tab{
+    background-color: aqua;
+    grid-column: 1/3;
+}
+
+.usuario{
+    grid-row: 2/3;
+    background-color: bisque;
+}
+.bio{
+    width: 50%;
+    height: 15%;
+    margin: 5% 10%;
+    border: 1px solid black;
+}
+.frec{
+    width: 80%;
+    height: 60%;
+    margin: 2% 10%;
+    border: 1px solid black;
+}

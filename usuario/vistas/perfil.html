@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/perfil.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <title>Perfil</title>
+</head>
+<body>
+
+    <!--nav-->
+    <div class="nav">
+    </div>
+
+    <!--inicio grid-->
+    <div class="grid">
+        <!--tab-->
+        <div class="tab">
+            <button class="tablinks" onclick="abrirTab(event, 'tabperfil')">Perfil</button>
+            <button class="tablinks" onclick="abrirTab(event, 'tabopinion')">Opiniones</button>
+            <button class="tablinks" onclick="abrirTab(event, 'tabguardado')">Guardados</button>
+        </div>
+       
+        <!--perfil-->
+        <div class="usuario">
+            perfil asdasda
+        </div>
+
+        <!-- Contenido de las pestañas -->
+        <div id="tabperfil" class="tabcontenido">
+            <div class="bio">
+
+            </div>
+            <div class="frec">
+                
+            </div>
+        </div>
+        
+        <div id="tabopinion" class="tabcontenido" style="display:none;">
+            Opiniones
+        </div>
+        
+        <div id="tabguardado" class="tabcontenido" style="display:none;">
+            Guardados
+        </div>
+    </div>
+
+    <script>
+        function abrirTab(evt, tabId) {
+            var i, tabcontent, tablinks;
+    
+            // Ocultar todos los elementos con clase "tabcontenido"
+            tabcontent = document.getElementsByClassName("tabcontenido");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+    
+            // Remover la clase "active" de todos los elementos con clase "tablinks"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+    
+            // Mostrar el contenido de la pestaña seleccionada y agregar la clase "active" al botón
+            document.getElementById(tabId).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</body>
+</html>
