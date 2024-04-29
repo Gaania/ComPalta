@@ -1,73 +1,123 @@
 html{
     overflow-y: hidden;
     overflow-x: hidden;
+    font-size: 12px;
 }
 
 .grid{
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-rows: 6% auto;
+    grid-template-rows:8% auto;
     grid-template-columns: 20% auto;
 
 }
 
 .tab{
-    background-color: #f19e38;
-    padding-left: 22rem;
+    background-color: #0f4020;
+    padding-left: 26rem;
     grid-column: 1/3;
-}
+    justify-content: center;
+    border: 2px solid #0f4020;
+
+    }
     .tab button {
         height: 100%;
         width: 8rem;
         background-color: #f19e38;
         border: 0;
-        line-height: 0.5;
     }
-    .tab button:focus{
-        background-color: #c28233;
+    
+    .tab h2{
+        font-size: 1.3rem;
+        line-height: 0;
+        color: #f4efef;
     }
 
+
+    .tab button {
+        background-color: transparent;
+        border: none;
+        padding: 10px;
+        position: relative;
+        gap: 8px;
+        cursor: pointer;
+
+        transition: all 0.2s ease;
+      }
+      
+        .tab button:not(:active):hover,
+        .tab button:focus {
+            background-color: #a8b1bc;
+        }
+        
+        .tab button:focus,
+        .tab button:active {
+            background-color: #a8b1bc;
+            outline: none;
+        }
+        
+        .tab button:focus::before,
+        .tab button:active::before {
+            opacity: 1;
+        }
+        .tab button::before {
+            content: "";
+            position: absolute;
+            top: 46px;
+            right: 0px;
+            width: 100%;
+            height: 2px;
+            background-color: #2f81f7;
+            border-radius: 5px;
+            opacity: 0;
+          }
+          
 .usuario{
     grid-row: 2/3;
-    background-color: bisque;
     text-align: center;
+    border-radius: 2%;
+
+    margin: 1rem;
 }
 
     .nombre{
         margin-top: 4rem;
-        font-size: 3.8rem;
+        font-size: 3.5rem;
+        
     }
     .imagen img{
         margin-top: 1.5rem;
-        width: 250px;
-        height: 250px;
+        width: 16rem;
+        height: 16rem;
         border-radius: 50%;
+        border: 1px solid #0f4020;
     }
 
     .fecha{
-        margin-top: 8rem;
+        margin-top: 5rem;
         font-size: 1.5rem;
+        
     }
 
 /* Tab perfil */
 #tabperfil{
     padding: 6% 5%;
-    border-radius: 2%;
-    border: 1px solid black;
-    background-color: #f1bc7a;
+    
 }
     .bio{
         width: 60%;
         height: 25%;
-        border: 1px solid black;
+        border: 1px solid #0f4020;
+        border-radius: 2%;
     }
 
     .frec{
         width: 80%;
         height: 60%;
         margin: 4rem 0rem;
-        border: 1px solid black;
+        border: 1px solid #0f4020;
+        border-radius: 2%;
     }
     #tabperfil h2{
         margin: 1rem;
@@ -86,11 +136,11 @@ html{
     .listado{
         width: 100%;
         height: 100%;
-        background-color: aqua;
-        border: 1px solid black;
+        border: 1px solid #0f4020;
         overflow-y: auto;
     }
 
     .titulo{
-        font-size: 2.8rem;
+        font-size: 2rem;
     }
+    
