@@ -16,33 +16,48 @@
     <!--inicio grid-->
     <div class="grid">
         <!--tab-->
-        <div class="tab">
-            <button class="tablinks" onclick="abrirTab(event, 'tabperfil')">Perfil</button>
-            <button class="tablinks" onclick="abrirTab(event, 'tabopinion')">Opiniones</button>
-            <button class="tablinks" onclick="abrirTab(event, 'tabguardado')">Guardados</button>
-        </div>
+        <section class="tab">
+            <button class="tablinks" onclick="abrirTab(event, 'tabperfil')"><h2>Perfil</h2></button>
+            <button class="tablinks" onclick="abrirTab(event, 'tabopinion')"><h2>Opiniones</h2></button>
+            <button class="tablinks" onclick="abrirTab(event, 'tabguardado')"><h2>Guardados</h2></button>
+        </section>
        
         <!--perfil-->
-        <div class="usuario">
-            perfil asdasda
-        </div>
-
-        <!-- Contenido de las pestañas -->
-        <div id="tabperfil" class="tabcontenido">
-            <div class="bio">
-
+        <section class="usuario">
+            <h1 class="nombre">Nombre de usuario</h1>
+            <div class="imagen">
+              <img src="../img/usuarioestandar.png" alt="perfil">
             </div>
-            <div class="frec">
-                
+            <div class="fecha">
+                fecha de creación 
+                <br>
+                24-01-1000
             </div>
-        </div>
-        
-        <div id="tabopinion" class="tabcontenido" style="display:none;">
-            Opiniones
-        </div>
-        
-        <div id="tabguardado" class="tabcontenido" style="display:none;">
-            Guardados
+        </section>
+
+        <!-- Contenido de las pestaña !-->
+            <section id="tabperfil" class="tabcontenido">
+                <div class="bio">
+                    <h2>Descripción</h2>
+                </div>
+                <div class="frec">
+                    <h2>Opiniones populares</h2>
+                </div>
+            </section>
+            
+            <section id="tabopinion" class="tabcontenido" style="display:none;">
+                <h1 class="titulo">Opiniones</h1>
+                <div class="listado">
+
+                </div>
+            </section>
+            
+            <section id="tabguardado" class="tabcontenido" style="display:none;">
+                <h1 class="titulo">Guardados</h1>
+                <div class="listado">
+
+                </div>
+            </section>
         </div>
     </div>
 
