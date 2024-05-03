@@ -9,10 +9,40 @@ include '../../BDD/conexion.php';
 //si la variable get coincide con la variable de sesion, se activa la configuración
 if (isset($_GET['usuario'])){
     if($_GET['usuario']==$sesion){
-
+        
     }
 }
+
+//obtener todos los datos de la bdd
+$sql = "SELECT nombre, imagen, fechaCreacion, biografia 
+    FROM usuario where 
+    nombre='gania'";
+    $usuario= mysqli_query($conexion, $sql);
+    if (!$usuario){
+        echo "<script>alert('Ha ocurrido un error. Vuelva a intentar.');history.go(-1);</script>";
+        exit();
+    }
+
+    $valores=mysqli_fetch_assoc($usuario);
+
+    $nombre= wordwrap(utf8_encode($valores['nombre']));
+    $fechacreacion= date("d-m-Y",strtotime($valores['fechaCreacion'])); 
+    $imagen= $valores['imagen'];
+    $biografia= wordwrap(utf8_encode($valores['biografia']));
+
+//obtener datos de opiniones
+$sql="SELECT restaurante.`nombre`, comida.`nombre`, `puntaje`, `comentario` 
+    FROM `puntaje` 
+    inner join usuario 
+    on puntaje.usuarioID=usuario.usuarioID
+    inner join comida
+    on puntaje.comidaID=comida.comidaID
+    inner join restaurante
+    on comida.restauranteID=restaurante.restauranteID
+    WHERE usuario.usuarioID=4";
+    $datos= mysqli_query($conexion,$sql);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,22 +69,23 @@ if (isset($_GET['usuario'])){
        
         <!--perfil-->
         <section class="usuario">
-            <h1 class="nombre">Nombre de usuario</h1>
+            
+            <h1 class="nombre"><?php echo $nombre; ?></h1>
             <div class="imagen">
               <img src="../img/usuarioestandar.png" alt="perfil">
             </div>
-            <button id="editar">Editar Perfil</button>
+
             <div class="fecha">
                 fecha de creación 
                 <br>
-                24-01-1000
+                <?php echo $fechacreacion; ?>
             </div>
         </section>
 
         <!-- Contenido de las pestaña !-->
             <section id="tabperfil" class="tabcontenido">
                 <div class="bio">
-                    <h2>Descripción</h2>
+                    <h2><?php echo $biografia; ?></h2>
                 </div>
                 <div class="frec">
                     <h2>Opiniones populares</h2>
@@ -64,19 +95,18 @@ if (isset($_GET['usuario'])){
             <section id="tabopinion" class="tabcontenido" style="display:none;">
                 <h1 class="titulo">Opiniones</h1>
                 <div class="listado">
-                    <div class="caja">
-
-                    </div>
-                    <div class="caja">
-
-                    </div>
-                    <div class="caja">
-
-                    </div>
-                    <div class="caja">
-
-                    </div>
-
+                    <?php
+                    if($datos){
+                        while ($opinion=mysqli_fetch_assoc($datos)){
+                            $comidanombre= $opinion['comida.`nombre`'];
+                            echo '<div class="caja">
+                            '.$comidanombre.'
+                            </div>';
+                        }
+                        
+                    }
+                    
+                    ?>
                 </div>
             </section>
             
@@ -102,7 +132,6 @@ if (isset($_GET['usuario'])){
             </section>
         </div>
     </div>
-
     <script>
         function abrirTab(evt, tabId) {
             var i, tabcontent, tablinks;
