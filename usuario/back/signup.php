@@ -63,7 +63,9 @@ if (isset($_GET)){
         exit();
     }
 
-    echo "<script>alert('¡Su usuario se ha registrado!');window.location='';</script>";
+    session_start();
+    $_SESSION["sesion"] = $nombre;
+    echo "<script>alert('¡Su usuario se ha registrado!');window.location=''../vistas/perfil.php'';</script>";
     exit();
 }
 ?>

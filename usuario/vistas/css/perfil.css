@@ -90,9 +90,23 @@ html{
         border-radius: 50%;
         border: 1px solid #0f4020;
     }
+    .usuario button{
+        width: 90%;
+        height: 6%;
+        margin: 3rem 5%;
+
+        border-radius: 15% ;
+        background-color: transparent;
+        border: 1px solid #0f4020;
+        font-size: 1.3rem;
+    }
+        .usuario button:not(:active):hover,
+        .usuario button:focus {
+            background-color:#607769;
+        }
 
     .fecha{
-        margin-top: 5rem;
+        
         font-size: 1.5rem;
         
     }
@@ -134,7 +148,7 @@ html{
 
     
     
-/* Aplica a varios */
+/* Tab gral */
 
 .titulo{
     font-size: 2rem;

@@ -1,3 +1,18 @@
+<?php
+//incluir mantener sesion
+include '../back/sesion.php';
+
+//incluir conexion a bdd
+include '../../BDD/conexion.php';
+
+//metodo get para acceder a algún perfil
+//si la variable get coincide con la variable de sesion, se activa la configuración
+if (isset($_GET['usuario'])){
+    if($_GET['usuario']==$sesion){
+
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,6 +43,7 @@
             <div class="imagen">
               <img src="../img/usuarioestandar.png" alt="perfil">
             </div>
+            <button id="editar">Editar Perfil</button>
             <div class="fecha">
                 fecha de creación 
                 <br>
@@ -106,6 +122,10 @@
             // Mostrar el contenido de la pestaña seleccionada y agregar la clase "active" al botón
             document.getElementById(tabId).style.display = "block";
             evt.currentTarget.className += " active";
+        }
+
+        function config(){
+
         }
     </script>
 </body>

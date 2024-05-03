@@ -24,7 +24,9 @@ if(isset($_GET)){
     if ($res){
         $num=mysqli_num_rows($res);
         if($num!=0){
-            echo "<script>alert('Has iniciado sesión');window.location='';</script>";
+            session_start();
+            $_SESSION["sesion"] = $nombre;
+            echo "<script>alert('Has iniciado sesión');window.location='../vistas/perfil.php';</script>";
             exit();
         }else{
             echo "<script>alert('ERROR: El correo o contraseña son incorrectos.');window.location='../vistas/login.html';</script>";
