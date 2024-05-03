@@ -34,7 +34,7 @@ if (isset($_GET)){
 
 
     //validaciones de repetición
-    $query="SELECT * from usuario where nombre='$nombre'";
+    $query="SELECT * from usuario where nombreUsuario='$nombre'";
     $res=mysqli_query($conexion, $query);
     if ($res){
         $num=mysqli_num_rows($res);
@@ -55,7 +55,7 @@ if (isset($_GET)){
     }
 
     //guardar registro
-    $query="INSERT INTO `usuario`(`nombre`, `clave`, `correo`, `fechaCreacion`, `tipoUsuarioID`) 
+    $query="INSERT INTO `usuario`(`nombreUsuario`, `clave`, `correo`, `fechaCreacion`, `tipoUsuarioID`) 
     VALUES ('$nombre','$clave','$correo','$fechacreacion','2')";
     $res=mysqli_query($conexion, $query);
     if (!$res){
@@ -63,9 +63,16 @@ if (isset($_GET)){
         exit();
     }
 
-    session_start();
-    $_SESSION["sesion"] = $nombre;
-    echo "<script>alert('¡Su usuario se ha registrado!');window.location='../vistas/perfil.php';</script>";
-    exit();
+
+    $query="SELECT usuarioID from usuario where nombreUsuario='$nombre'";
+    $res=mysqli_query($conexion, $query);
+    if ($res){
+        $usuario=mysqli_fetch_assoc($res);
+        session_start();
+        $_SESSION["sesion"] = $usuario['usuarioID'];
+        echo "<script>alert('¡Su usuario se ha registrado!');window.location='../vistas/perfil.php';</script>";
+        exit();
+    }
+
 }
 ?>

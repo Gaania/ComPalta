@@ -24,8 +24,10 @@ if(isset($_GET)){
     if ($res){
         $num=mysqli_num_rows($res);
         if($num!=0){
+            $usuario=mysqli_fetch_assoc($res);
+
             session_start();
-            $_SESSION["sesion"] = $nombre;
+            $_SESSION["sesion"] = $usuario['usuarioID'];
             echo "<script>alert('Has iniciado sesión');window.location='../vistas/perfil.php';</script>";
             exit();
         }else{

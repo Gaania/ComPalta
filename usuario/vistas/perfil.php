@@ -14,9 +14,9 @@ if (isset($_GET['usuario'])){
 }
 
 //obtener todos los datos de la bdd
-$sql = "SELECT nombre, imagen, fechaCreacion, biografia 
+$sql = "SELECT nombreUsuario, imagen, fechaCreacion, biografia 
     FROM usuario where 
-    nombre='gania'";
+    usuarioID=4";
     $usuario= mysqli_query($conexion, $sql);
     if (!$usuario){
         echo "<script>alert('Ha ocurrido un error. Vuelva a intentar.');history.go(-1);</script>";
@@ -25,13 +25,13 @@ $sql = "SELECT nombre, imagen, fechaCreacion, biografia
 
     $valores=mysqli_fetch_assoc($usuario);
 
-    $nombre= wordwrap(utf8_encode($valores['nombre']));
+    $nombre= wordwrap(utf8_encode($valores['nombreUsuario']));
     $fechacreacion= date("d-m-Y",strtotime($valores['fechaCreacion'])); 
     $imagen= $valores['imagen'];
     $biografia= wordwrap(utf8_encode($valores['biografia']));
 
 //obtener datos de opiniones
-$sql="SELECT restaurante.`nombre`, comida.`nombre`, `puntaje`, `comentario` 
+$sql="SELECT `nombre`,`nombreComida`, `puntaje`, `comentario` 
     FROM `puntaje` 
     inner join usuario 
     on puntaje.usuarioID=usuario.usuarioID
@@ -98,9 +98,14 @@ $sql="SELECT restaurante.`nombre`, comida.`nombre`, `puntaje`, `comentario`
                     <?php
                     if($datos){
                         while ($opinion=mysqli_fetch_assoc($datos)){
-                            $comidanombre= $opinion['comida.`nombre`'];
+                            $comidanombre= $opinion['nombreComida'];
+                            $restaurantenombre= $opinion['nombre'];
+                            $puntaje=$opinion['puntaje'];
+                            $comentario=$opinion['comentario'];
                             echo '<div class="caja">
-                            '.$comidanombre.'
+                            <p>'.$comidanombre.'</p>
+                            <p>'.$restaurantenombre.'</p> 
+                            <p>'.$puntaje.'</p><p>'.$comentario.'</p>
                             </div>';
                         }
                         

@@ -161,4 +161,12 @@ html{
     border: 1px solid #0f4020;
     margin: 1.5rem 2rem;
     border-radius: 1%;
+
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 10% 15% 10% auto;
+    justify-content: start;
 }
+    .caja p{
+        line-height: 0;
+    }
