@@ -124,13 +124,80 @@ html{
 #tabopinion{
     margin: 3% 5%;
 }
+    #tabopinion .listado{
+        width: 80%;
+        height: 100%;
+        border: 1px solid #0f4020;
+        overflow-y: auto;
+        border-radius: 1%;
+        padding: 2rem 1rem 1rem 1rem ;
+        
 
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: flex-start;
+    }
+
+    #tabopinion .caja{
+        width: 43%;
+        height: 36%;
+        border: 1px solid #0f4020;
+        margin: 1.5rem 2rem;
+        border-radius: 1%;
+
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: 10% 15% 10% auto;
+        justify-content: start;
+    }
+    #tabopinion .caja p{
+            line-height: 1;
+        }
+
+    
 
 /* Tab guardados */
 #tabguardado{
     margin: 3% 5%;
 }
+    #tabguardado .listado{
+        width: 80%;
+        height: 100%;
+        border: 1px solid #0f4020;
+        overflow-y: auto;
+        border-radius: 1%;
+        padding: 1rem 1rem 1rem 1rem ;
+        
 
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content:flex-start;
+    }
+    #tabguardado .caja{
+        border: 1px solid #0f4020;
+        margin: 1rem 1rem;
+        border-radius: 1%;
+    
+        width: 20%;
+        height: 20%;
+        display: flex;
+        align-items: center;
+        
+    }
+        .caja span{
+            width: 100%;
+            text-align: center;
+        }
+
+    #tabguardado .listado p{
+        width: 100%;
+        height: 1rem;
+        font-size: 1.5rem;
+        padding-left: 2.5rem;
+        line-height: 0.8;
+    }
 
     
     
@@ -139,7 +206,7 @@ html{
 .titulo{
     font-size: 2rem;
 }
-
+/*
 .listado{
     width: 80%;
     height: 100%;
@@ -169,4 +236,4 @@ html{
 }
     .caja p{
         line-height: 0;
-    }
+    }*/

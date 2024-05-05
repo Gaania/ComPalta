@@ -16,7 +16,7 @@ if (isset($_GET['usuario'])){
 //obtener todos los datos de la bdd
 $sql = "SELECT nombreUsuario, imagen, fechaCreacion, biografia 
     FROM usuario where 
-    usuarioID=4";
+    usuarioID=5";
     $usuario= mysqli_query($conexion, $sql);
     if (!$usuario){
         echo "<script>alert('Ha ocurrido un error. Vuelva a intentar.');history.go(-1);</script>";
@@ -25,11 +25,15 @@ $sql = "SELECT nombreUsuario, imagen, fechaCreacion, biografia
 
     $valores=mysqli_fetch_assoc($usuario);
 
-    $nombre= wordwrap(utf8_encode($valores['nombreUsuario']));
+    $nombre= wordwrap($valores['nombreUsuario']);
     $fechacreacion= date("d-m-Y",strtotime($valores['fechaCreacion'])); 
     $imagen= $valores['imagen'];
-    $biografia= wordwrap(utf8_encode($valores['biografia']));
-
+    if($valores['biografia']){
+        $biografia= wordwrap(utf8_decode($valores['biografia']));
+    }else{
+        $biografia='';
+    }
+    
 //obtener datos de opiniones
 $sql="SELECT `nombre`,`nombreComida`, `puntaje`, `comentario` 
     FROM `puntaje` 
@@ -41,8 +45,14 @@ $sql="SELECT `nombre`,`nombreComida`, `puntaje`, `comentario`
     on comida.restauranteID=restaurante.restauranteID
     WHERE usuario.usuarioID=4";
     $datos= mysqli_query($conexion,$sql);
-?>
 
+
+//obtener registros de listas del usuario
+$sql="SELECT `listaID`, `nombreLista` FROM `lista` WHERE usuarioID=5";
+$lis=mysqli_query($conexion,$sql);
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -118,21 +128,34 @@ $sql="SELECT `nombre`,`nombreComida`, `puntaje`, `comentario`
             <section id="tabguardado" class="tabcontenido" style="display:none;">
                 <h1 class="titulo">Guardados</h1>
                 <div class="listado">
-                    <div class="caja">
-
-                    </div>
-                    <div class="caja">
-
-                    </div>
-                    <div class="caja">
-
-                    </div>
-                    <div class="caja">
-
-                    </div>
-                    <div class="caja">
-
-                    </div>
+                    <?php
+                        //si hay registros
+                        if($lis){
+                            //mientras hayan registros
+                            while($lista=mysqli_fetch_assoc($lis)){
+                                //mostramos info de lista
+                                $ID= $lista['listaID'];
+                                $nombre= $lista['nombreLista'];
+                                
+                                echo '<p>'.$nombre.'</p>';
+                                //obtener guardados segun su lista
+                                $sql="SELECT `nombre`
+                                FROM `guardado` 
+                                inner join restaurante
+                                on guardado.restauranteID=restaurante.restauranteID
+                                WHERE listaID=$ID";
+                                $guar=mysqli_query($conexion,$sql);
+                                if($guar){
+                                    while($guardados=mysqli_fetch_assoc($guar)){    
+                                        echo '<div class="caja">
+                                            <span>'.$guardados['nombre'].'</span>
+                                        </div>';
+                                    }
+                                }
+                            }
+                            
+                        }
+                    ?>
                 </div>
             </section>
         </div>

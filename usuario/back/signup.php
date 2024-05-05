@@ -63,11 +63,24 @@ if (isset($_GET)){
         exit();
     }
 
-
+    //obtener el ID del usuario recién creado
     $query="SELECT usuarioID from usuario where nombreUsuario='$nombre'";
     $res=mysqli_query($conexion, $query);
     if ($res){
         $usuario=mysqli_fetch_assoc($res);
+        $ID=$usuario['usuarioID'];
+
+        //Crear lista para guardar restaurantes, de no funcionar se borra el perfil del usuario
+        $query="INSERT INTO `lista`(`usuarioID`, `nombreLista`) 
+        VALUES ('$ID','Por visitar')";
+        $res=mysqli_query($conexion, $query);
+        if (!$res){
+            $query="DELETE FROM usuario WHERE usuarioID='$ID'";
+            echo "<script>alert('ERROR: No se guardó su usuario. Vuelva a intentar.');history.go(-1);</script>";
+            exit();
+        }
+        
+        //iniciar sesión del usuario, con su ID
         session_start();
         $_SESSION["sesion"] = $usuario['usuarioID'];
         echo "<script>alert('¡Su usuario se ha registrado!');window.location='../vistas/perfil.php';</script>";
