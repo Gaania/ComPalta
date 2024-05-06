@@ -84,15 +84,23 @@ html{
         
     }
     .imagen img{
-        margin-top: 3rem;
+        margin-top: 2rem;
         width: 16rem;
         height: 16rem;
         border-radius: 50%;
         border: 1px solid #0f4020;
     }
+
+    .usuario button{
+        margin-top: 3REM;
+        width: 80%;
+        height: 5%;
+        background-color: transparent;
+
+    }
     
     .fecha{
-        margin-top: 5rem;
+        margin-top: 3rem;
         font-size: 1.5rem;
         
     }
@@ -198,8 +206,6 @@ html{
         padding-left: 2.5rem;
         line-height: 0.8;
     }
-
-    
     
 /* Tab gral */
 

@@ -84,7 +84,7 @@ $lis=mysqli_query($conexion,$sql);
             <div class="imagen">
               <img src="../img/usuarioestandar.png" alt="perfil">
             </div>
-
+            <button onclick="modificar()">Modificar perfil</button>
             <div class="fecha">
                 fecha de creación 
                 <br>
@@ -181,8 +181,16 @@ $lis=mysqli_query($conexion,$sql);
             evt.currentTarget.className += " active";
         }
 
-        function config(){
+        function modificar(){
+            var ocultar=document.querySelectorAll('.ocultar');
+            ocultar.forEach(function(elemento){
+                elemento.style.display='none';
+            })
 
+            var mostrar=document.querySelectorAll('.mostrar');
+            mostrar.forEach(function(elemento){
+                elemento.style.display='block;'
+            })
         }
     </script>
 </body>
