@@ -16,7 +16,7 @@ if (isset($_GET['usuario'])){
 //obtener todos los datos de la bdd
 $sql = "SELECT nombreUsuario, imagen, fechaCreacion, biografia 
     FROM usuario where 
-    usuarioID=5";
+    usuarioID=4";
     $usuario= mysqli_query($conexion, $sql);
     if (!$usuario){
         echo "<script>alert('Ha ocurrido un error. Vuelva a intentar.');history.go(-1);</script>";
@@ -48,7 +48,7 @@ $sql="SELECT `nombre`,`nombreComida`, `puntaje`, `comentario`
 
 
 //obtener registros de listas del usuario
-$sql="SELECT `listaID`, `nombreLista` FROM `lista` WHERE usuarioID=5";
+$sql="SELECT `listaID`, `nombreLista` FROM `lista` WHERE usuarioID=4";
 $lis=mysqli_query($conexion,$sql);
 
 
@@ -69,22 +69,22 @@ $lis=mysqli_query($conexion,$sql);
     </div>
 
     <!--inicio grid-->
-    <div class="grid">
+    <div class="grid" id="grid">
         <!--tab-->
         <section class="tab">
             <button class="tablinks" onclick="abrirTab(event, 'tabperfil')"><h2>Perfil</h2></button>
             <button class="tablinks" onclick="abrirTab(event, 'tabopinion')"><h2>Opiniones</h2></button>
             <button class="tablinks" onclick="abrirTab(event, 'tabguardado')"><h2>Guardados</h2></button>
+            <button class="tablinks" onclick="config()"><h2>Configuración</h2></button>
         </section>
        
-        <!--perfil-->
+        <!-- Contenido de información de usuario -->
         <section class="usuario">
             
             <h1 class="nombre"><?php echo $nombre; ?></h1>
             <div class="imagen">
               <img src="../img/usuarioestandar.png" alt="perfil">
             </div>
-            <button onclick="modificar()">Modificar perfil</button>
             <div class="fecha">
                 fecha de creación 
                 <br>
@@ -93,7 +93,7 @@ $lis=mysqli_query($conexion,$sql);
         </section>
 
         <!-- Contenido de las pestaña !-->
-            <section id="tabperfil" class="tabcontenido">
+            <section id="tabperfil" class="tabcontenido" >
                 <div class="bio">
                     <h2><?php echo $biografia; ?></h2>
                 </div>
@@ -133,7 +133,7 @@ $lis=mysqli_query($conexion,$sql);
                         if($lis){
                             //mientras hayan registros
                             while($lista=mysqli_fetch_assoc($lis)){
-                                //mostramos info de lista
+                                // info de lista
                                 $ID= $lista['listaID'];
                                 $nombre= $lista['nombreLista'];
                                 
@@ -158,7 +158,15 @@ $lis=mysqli_query($conexion,$sql);
                     ?>
                 </div>
             </section>
+
+
         </div>
+
+        <!-- Contenido de configuración !-->
+        <section>
+                  <h1>TITULOOOOOOOOOOO</h1>  
+        </section>
+        
     </div>
     <script>
         function abrirTab(evt, tabId) {
@@ -181,16 +189,9 @@ $lis=mysqli_query($conexion,$sql);
             evt.currentTarget.className += " active";
         }
 
-        function modificar(){
-            var ocultar=document.querySelectorAll('.ocultar');
-            ocultar.forEach(function(elemento){
-                elemento.style.display='none';
-            })
-
-            var mostrar=document.querySelectorAll('.mostrar');
-            mostrar.forEach(function(elemento){
-                elemento.style.display='block;'
-            })
+        function config(){
+             // Ocultar informacion de usuario
+            document.getElementById('grid').style.display = 'none';
         }
     </script>
 </body>
