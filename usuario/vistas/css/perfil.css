@@ -73,7 +73,7 @@ html{
     
 /* Info usuario */
 .usuario{
-    grid-row: 2/3;
+    grid-column: 1/2;
     text-align: center;
     padding: 1rem;
 }
@@ -107,8 +107,12 @@ html{
         margin-top: 2.8rem;
         font-size: 1.5rem;
         
-    }
+}
 
+/* Todos los tabs */
+.tabcontenido{
+    grid-column: 2/3;
+}
 /* Tab perfil */
 #tabperfil{
     padding: 6% 5%;
@@ -131,7 +135,7 @@ html{
 
     #tabperfil h2{
         margin: 1rem;
-    }
+}
 
 /* Tab opiniones */
 #tabopinion{
@@ -166,7 +170,7 @@ html{
     }
     #tabopinion .caja p{
             line-height: 1;
-        }
+}
 
     
 
@@ -210,41 +214,174 @@ html{
         font-size: 1.5rem;
         padding-left: 2.5rem;
         line-height: 0.8;
-    }
+}
     
 /* Tab gral */
 
 .titulo{
     font-size: 2rem;
 }
-/*
-.listado{
-    width: 80%;
-    height: 100%;
-    border: 1px solid #0f4020;
-    overflow-y: auto;
-    border-radius: 1%;
-    padding: 2rem 1rem 1rem 1rem ;
-    
 
+/* configuracion */
+.configuracion{
+    display: grid;
+    grid-template-rows: auto auto;
+    margin:2rem;
+    overflow-y:visible;
+}
+    .formularioperfil{
+        display:grid;
+        height: 60%;
+        grid-template-columns: auto 50%;
+        grid-template-rows: 40% auto auto;
+        grid-template-areas: "titulo img"
+                             "form img"
+                             "form img";
+    }
+        .formularioperfil h1{
+            grid-area: titulo;
+            padding-left: 20%;
+            margin-bottom: 2rem;
+            font-size: 4rem;
+            
+        }
+
+        .formularioperfil form{
+            grid-area: form;
+            width: 40rem;
+            padding-left: 5rem;
+
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+            .formularioperfil p{
+                width: 30%;
+            }
+            .formularioperfil input{
+                border: 1.5px solid #0f4020;
+                border-radius: 5%;
+                height: 3rem;
+                width: 50%;
+                transition: 0.2s ease-in-out;
+            }
+            #actualizar, #enviar{
+                margin-left:5%;
+                width: 100%;
+                margin: 0;
+            }
+        
+        .cambiarimagen{
+            
+            width: 90%;
+            height: 80%;
+            grid-area:img;
+            padding-top:3rem;
+            padding-bottom: 5rem;
+            padding-right: 5rem;
+            
+        }
+            .cambiarimagen img{
+                width: 35%;
+                margin:0% 40%;
+                
+            }
+            .cambiarimagen form{
+                width: 100%;
+                flex-direction: row;
+                flex-wrap: wrap;
+                padding: 0;
+                align-content: center;
+                
+            }
+            .cambiarboton {
+                position: relative;
+                bottom: 5rem;
+                left: 30rem;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                border: 2px solid black;
+                background-color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
+              
+              .icono {
+                color:black;
+                font-size: 2rem;
+                cursor: pointer;
+                }
+              
+              .imagennueva{
+                position: relative;
+                opacity: 0;
+                width: 100%;
+                height: 100%;
+                cursor: pointer !important;
+              }
+              
+              
+                #uploadButton, #subirImagen a{
+                    display: block;
+                    width: 20%;
+                    margin: 0% 5%;
+                    height: 3rem;
+                    padding: 0;
+                    border-radius: 2%;
+                    text-align: center;
+                    border: 1px solid black;
+                    background-color: azure;
+                    color: black;
+                    
+                }
+                #uploadButton:hover{
+                    color: red;
+                }
+
+                #uploadButton, #subirImagen p{
+                    
+                    line-height: 0;
+                    width: 100%;
+                }
+
+
+        .botones{
+            width: 100%;
+        }
+            .boton{
+                width: 10rem;
+                height: 2rem;
+                margin: 0;
+                padding: 0;
+            }
+
+
+/* seccion clave */
+.formularioclave form{
+    width: 90%;
+    margin:0 5rem;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     flex-wrap: wrap;
-    align-content: flex-start;
-}
+    align-content: center
 
-.caja{
-    width: 43%;
-    height: 36%;
-    border: 1px solid #0f4020;
-    margin: 1.5rem 2rem;
-    border-radius: 1%;
-
-    display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: 10% 15% 10% auto;
-    justify-content: start;
 }
-    .caja p{
-        line-height: 0;
-    }*/
+    .formularioclave h2{
+        width: 100%;
+        line-height: 1;
+    }
+    .formularioclave span{
+        height: 100%;
+        margin-top: 1rem;
+
+    }
+    .formularioclave input{
+        height: 100%;
+
+    }
+

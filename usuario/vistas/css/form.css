@@ -49,6 +49,24 @@ html{
     padding: 8px 15px;
     color:#0f4020;
     }
+
+
+  .link{
+    margin-top: 0.5rem;
+    background-color:transparent ;
+      display: block;
+      width: 100%;
+    
+  }
+
+  .link a{
+    padding:0rem 1rem;
+    display: block;
+    text-align: left;
+    width: 100%;
+    color:  #0FAC37;
+    font-size: 0.8rem;
+  }
   
   .seccion {
     padding: 16px;
@@ -79,10 +97,11 @@ html{
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color .3s ease;
+    
     }
   
   .boton:hover {
     background-color: #0f4020;
+    transition: .3s ease;
     }
   

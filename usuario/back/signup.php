@@ -86,6 +86,6 @@ if (isset($_GET)){
         echo "<script>alert('¡Su usuario se ha registrado!');window.location='../vistas/perfil.php';</script>";
         exit();
     }
-
+    
 }
 ?>
