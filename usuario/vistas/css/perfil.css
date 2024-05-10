@@ -2,6 +2,8 @@ html{
     overflow-y: hidden;
     overflow-x: hidden;
     font-size: 12px;
+    background-color: #fdfdf9;
+
 }
 
 .grid{
@@ -88,19 +90,6 @@ html{
         width: 16rem;
         height: 16rem;
         border-radius: 50%;
-        border: 1px solid #0f4020;
-    }
-
-    .usuario button{
-        display: block;
-        margin-top: 2.5rem;
-        margin-left: 15%;
-        width: 70%;
-        height: 5%;
-        border: 1px solid #0f4020;
-        border-radius: 1%;
-        background-color: transparent;
-
     }
     
     .fecha{
@@ -119,17 +108,10 @@ html{
     
 }
     .bio{
-        width: 60%;
-        height: 25%;
-        border: 1px solid #0f4020;
-        border-radius: 1%;
-    }
-
-    .frec{
-        width: 80%;
-        height: 60%;
-        margin: 4rem 0rem;
-        border: 1px solid #0f4020;
+        margin: 10% 5%;
+        width: 70%;
+        height: 40%;
+        border: 1px solid #F19E38;
         border-radius: 1%;
     }
 
@@ -141,10 +123,13 @@ html{
 #tabopinion{
     margin: 3% 5%;
 }
+    #tabopinion h1{
+        color:#F19E38;
+    }
     #tabopinion .listado{
         width: 80%;
         height: 90%;
-        border: 1px solid #0f4020;
+        border: 1px solid #F19E38;
         overflow-y: auto;
         border-radius: 1%;
         padding: 2rem 1rem 1rem 1rem ;
@@ -159,7 +144,7 @@ html{
     #tabopinion .caja{
         width: 43%;
         height: 36%;
-        border: 1px solid #0f4020;
+        border: 1px solid #F19E38;
         margin: 1.5rem 2rem;
         border-radius: 1%;
 
@@ -178,10 +163,13 @@ html{
 #tabguardado{
     margin: 3% 5%;
 }
+    #tabguardado h1{
+        color:#F19E38;
+    }
     #tabguardado .listado{
         width: 80%;
         height: 90%;
-        border: 1px solid #0f4020;
+        border: 1px solid #F19E38;
         overflow-y: auto;
         border-radius: 1%;
         padding: 1rem 1rem 1rem 1rem ;
@@ -193,7 +181,7 @@ html{
         align-content:flex-start;
     }
     #tabguardado .caja{
-        border: 1px solid #0f4020;
+        border: 1px solid #F19E38;
         margin: 1rem 1rem;
         border-radius: 1%;
     
@@ -226,8 +214,9 @@ html{
 .configuracion{
     display: grid;
     grid-template-rows: auto auto;
-    margin:2rem;
-    overflow-y:visible;
+    padding:2rem;
+    font-size: 1.4rem;
+    font-weight: bold;
 }
     .formularioperfil{
         display:grid;
@@ -237,18 +226,21 @@ html{
         grid-template-areas: "titulo img"
                              "form img"
                              "form img";
+                             
     }
         .formularioperfil h1{
             grid-area: titulo;
             padding-left: 20%;
             margin-bottom: 2rem;
             font-size: 4rem;
+            color: #F19E38;
             
         }
 
         .formularioperfil form{
+            margin-top: 3rem;
             grid-area: form;
-            width: 40rem;
+            width: 45rem;
             padding-left: 5rem;
 
             display: flex;
@@ -259,9 +251,12 @@ html{
 
             .formularioperfil p{
                 width: 30%;
+                font-size: 1.4rem;
+                font-weight: bold;
             }
             .formularioperfil input{
-                border: 1.5px solid #0f4020;
+                border:1px solid #F19E38;
+                background-color: #ffffff;
                 border-radius: 5%;
                 height: 3rem;
                 width: 50%;
@@ -272,20 +267,36 @@ html{
                 width: 100%;
                 margin: 0;
             }
+            .inputclave{
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+            }
+                .inputclave p{
+                    width: 30%;
+                }
+                .inputclave input{
+                    width: 50%;
+                }
         
         .cambiarimagen{
-            
-            width: 90%;
-            height: 80%;
+            width: 100%;
+            height: 100%;
             grid-area:img;
+            border-radius: 5%;
             padding-top:3rem;
-            padding-bottom: 5rem;
-            padding-right: 5rem;
+            padding-bottom: 1rem;
             
         }
             .cambiarimagen img{
-                width: 35%;
-                margin:0% 40%;
+                border-radius: 50%;
+                height: 19rem;
+                width: 19rem;
+                overflow: hidden;
+                margin:0% 25% 0% 21%;
+
                 
             }
             .cambiarimagen form{
@@ -293,17 +304,20 @@ html{
                 flex-direction: row;
                 flex-wrap: wrap;
                 padding: 0;
-                align-content: center;
+                margin: 0;
+                margin-left: -5.5rem ;
+                justify-content: center;
+
                 
             }
             .cambiarboton {
                 position: relative;
-                bottom: 5rem;
-                left: 30rem;
+                bottom: 7rem;
+                left: 6rem;
                 width: 50px;
                 height: 50px;
                 border-radius: 50%;
-                border: 2px solid black;
+                border: 2px solid #F19E38;
                 background-color: white;
                 display: flex;
                 justify-content: center;
@@ -311,41 +325,38 @@ html{
               }
               
               .icono {
-                color:black;
+                color:#F19E38;
                 font-size: 2rem;
                 cursor: pointer;
                 }
               
               .imagennueva{
-                position: relative;
-                opacity: 0;
-                width: 100%;
-                height: 100%;
-                cursor: pointer !important;
+                    position: absolute;
+                    opacity: 0;
+                    width: 100%;
+                    height: 100%;
+                    cursor: pointer !important;
               }
               
               
-                #uploadButton, #subirImagen a{
+              
+                .botonimg{
                     display: block;
-                    width: 20%;
+                    width: 10%;
+                    max-height: 5rem;
                     margin: 0% 5%;
-                    height: 3rem;
-                    padding: 0;
-                    border-radius: 2%;
+                    border-radius: 35%;
                     text-align: center;
-                    border: 1px solid black;
-                    background-color: azure;
+                    border: 1px solid #F19E38;
+                    background-color: #ffffff;
                     color: black;
-                    
-                }
-                #uploadButton:hover{
-                    color: red;
-                }
+                    font-size: 1rem;
 
-                #uploadButton, #subirImagen p{
                     
-                    line-height: 0;
-                    width: 100%;
+                }
+                a{
+                    padding-top: 1rem;
+                    font-weight: 400;
                 }
 
 
@@ -353,35 +364,59 @@ html{
             width: 100%;
         }
             .boton{
+                background-color: #ffffff;
+
+                text-align: center;
                 width: 10rem;
                 height: 2rem;
                 margin: 0;
-                padding: 0;
+                border-radius: 8px;
+
             }
 
 
 /* seccion clave */
-.formularioclave form{
+    .formularioclave form{
     width: 90%;
-    margin:0 5rem;
+    margin:2rem 5rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
     align-content: center
-
-}
+    }
     .formularioclave h2{
         width: 100%;
         line-height: 1;
+        color: #F19E38;
     }
     .formularioclave span{
         height: 100%;
-        margin-top: 1rem;
+        
+        width: 20%;
 
+    }
+    .formularioclave p{
+        line-height: 0.5;
+    }
+    
+    input #botonc{
+            align-self: center;
+            height: 100%;
+            width: 100%;
+            border-radius: 35%;
+            text-align: center;
+            border: 1px solid #F19E38;
+            background-color: #ffffff;
+            font-size: 1rem;
+            padding: 4rem;
     }
     .formularioclave input{
         height: 100%;
+        
+        border:1px solid #F19E38;
+        background-color: #ffffff;
+        border-radius: 5%;
+        transition: 0.2s ease-in-out;
 
     }
-

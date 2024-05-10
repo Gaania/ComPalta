@@ -43,8 +43,6 @@ if ($_FILES["imagennueva"]["error"] > 0) {
     // Verificar si $uploadOk está configurado en 0 por algún error
     if ($uploadOk == 0) {
         echo "El archivo no fue subido.";
-        $query="UPDATE usuario SET `imagen`='img/usuarioestandar.png' WHERE usuarioID='$sesion'";
-        $res=mysqli_query($conexion,$query);
     // Si todo está bien, intentar subir el archivo
     } else {
 
@@ -53,6 +51,7 @@ if ($_FILES["imagennueva"]["error"] > 0) {
             if ($sql){
                 if (move_uploaded_file($_FILES["imagennueva"]["tmp_name"], $target_file)) {
                     echo "Se actualizó su imagen de perfil";
+                    echo "<script>location.reload();</script>";
                 }
             }else{
                 echo "Error al subir el archivo.";

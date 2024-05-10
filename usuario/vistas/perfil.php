@@ -104,9 +104,7 @@ $lis=mysqli_query($conexion,$sql);
                 <div class="bio">
                     <h2><?php echo $biografia; ?></h2>
                 </div>
-                <div class="frec">
-                    <h2>Opiniones populares</h2>
-                </div>
+               
             </section>
             
             <section id="tabopinion" class="tabcontenido" style="display:none;">
@@ -188,8 +186,8 @@ $lis=mysqli_query($conexion,$sql);
                     
                     ';
                     ?>
-                    <span id="inputclave" style="display: none;">
-                        Ingresar clave
+                    <span id="inputclave" class="inputclave" style="display: none;">
+                        <p>Ingresar clave</p>
                         <input type="text" name="clave" id="clave" maxlength="12" minlength="8" required>
                     </span>
                     <span class="botones">
@@ -204,15 +202,19 @@ $lis=mysqli_query($conexion,$sql);
                         <img src="../'.$imagen.'" alt="perfil">
                         ';
                         ?>
-                        <form id="subirImagen" enctype="multipart/form-data">
-                            <input type="file" name="imagennueva" id="imagennueva">
-                            <button type="submit" >Subir Imagen</button>
-                        </form>
+                        <form id="subirImagen" enctype="multipart/form-data">                       
+                        <button class="botonimg" type="submit">Subir <br> Imagen</button>
+                        <div class="cambiarboton">
+                            <input class="imagennueva" name="imagennueva" id="imagennueva"type="file">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" stroke-linejoin="round" stroke-linecap="round" viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor" class="icono"><polyline points="16 16 12 12 8 16"></polyline><line y2="21" x2="12" y1="12" x1="12"></line><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path><polyline points="16 16 12 12 8 16"></polyline></svg>
+                        </div> 
                         <?php
                         echo'
-                        <a href="../back/eliminarimagen.php?img='.$imagen.'">Eliminar imagen</a>
+                        <a href="../back/eliminarimagen.php?img='.$imagen.'" class="botonimg">Eliminar imagen</a>
                         ';
                         ?>
+                        </form>
+                        
                         <div id="message"></div>
                     </span>
                     
@@ -225,21 +227,20 @@ $lis=mysqli_query($conexion,$sql);
                         echo'
                         <h2>Cambiar contraseña</h2>
                         <span>
-                            Contraseña actual
+                            <p>Contraseña actual</p>
                             <input type="password" name="clave" id="clave" maxlength="12" minlength="8" required>
                         </span>
                         <span>
-                            Nueva contraseña
+                            <p>Nueva contraseña</p>
                             <input type="password" name="clavenueva" id="clavenueva" maxlength="12" minlength="8" required>
-                        </span
+                        </span>
                         <span>
-                            Verifica la nueva contraseña
+                            <p>Verifica la nueva contraseña</p>
                             <input type="password" name="clavenueva2" id="clavenueva2" maxlength="12" minlength="8" required>
                         </span>
                         <span>
-                            <input class="boton"  type="submit">
-                            <input class="boton"  type="reset">
-                        </span>
+                            <button class="botonc" id="botonc" type="submit">Actualizar</button>
+                            </span>
                         ';
                     ?>
                     </form>
@@ -276,7 +277,7 @@ $lis=mysqli_query($conexion,$sql);
         }
 
         function ingresarclave(){
-            document.getElementById('inputclave').style.display = 'block';
+            document.getElementById('inputclave').style.display = 'flex';
             document.getElementById('enviar').style.display = 'block';
             document.getElementById('actualizar').style.display = 'none';
         }
