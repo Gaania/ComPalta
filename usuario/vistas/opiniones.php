@@ -20,7 +20,7 @@ $op=mysqli_query($conexion,$query);
     
 ?>
 <!--Botón para escribir una opinion!-->
-    <button onclick="sesioniniciada()"></button>
+    <button id="comentar" onclick="sesioniniciada()">Comentar</button>
 
     <!-- De tener la sesion iniciada, aparece el form !-->
     <div id="enviaropinion" class="enviaropinion" style="display:none;">
