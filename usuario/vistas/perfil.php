@@ -63,17 +63,57 @@ $lis=mysqli_query($conexion,$sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/perfil.css">
     <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/nav.css">
     <title>Perfil</title>
 </head>
 <body>
 
-    <!--nav-->
-    <div class="nav">
-    </div>
+    <!--nav!-->
+    <nav class="nav">
+        <div class="logo">
+            <a href="index.php">
+                <img class="img" src="img/logo_palta.png" >
+            </a> 
+        </div>   
+        <ul>
+            <li ><a class="enla" href="restaurantes.php"><span class="fa-solid fa-shop"></span>    Restaurantes</a></li> 
+            <li><a class="enla" href="comidas.php"><span class="fa-solid fa-carrot"></span>   Comidas</a></li>
+            <li>
+            <div class="search">
+                <input type="text" class="search__input" placeholder="Buscar">
+                <button class="search__button">
+                    <svg class="search__icon" aria-hidden="true" viewcuadro="0 0 24 24">
+                        <g>
+                        <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+                        </g>
+                    </svg>
+                </button>
+            </div></li>
+        </ul>
+        <div class="usuario">
+        <?php 
+        if(isset($_SESSION["sesion"])){
+            echo'<a id="uss" href=""><img src="img\icono_us1.jpg" ></a>
+            <ul class="sub-elemento1">
+                <li class="li"><a><span class="fa-solid fa-user" style="color: #ffffff;"></span>     Perfil</a></li>
+                <li class="li"><a href=""><span class="fa-solid fa-bookmark"></span>   Guardados</a></li>
+                <li class="li"><a href=""><span class="fa-solid fa-right-to-bracket"></span>      Cerrar sesión</a></li>
+            </ul>';
+        }
+        else{
+            echo'<a id="uss" href=""><img src="img\icono_us1.jpg" ></a>
+                <ul class="sub-elemento2">
+                    <li class="li" ><a href="iniciar-sesion.thml"><span class="fa-solid fa-right-to-bracket"></span>     Iniciar sesión</a></li>
+                    <li class="li"><a href="#"><span class="fa-solid fa-user-plus"></span>   Crear cuenta</a></li>
+            </ul>';
+        }
+        ?>
+        </div>
+    </nav>
 
         <!--tab-->
     <section class="tab">
-        <button class="tablinks" onclick="abrirTab(event, 'tabperfil')"><h2>Perfil</h2></button>
+        <button class="tablinks" onclick="abrirperfil(event, 'tabperfil')"><h2>Perfil</h2></button>
         <button class="tablinks" onclick="abrirTab(event, 'tabopinion')"><h2>Opiniones</h2></button>
         <button class="tablinks" onclick="abrirTab(event, 'tabguardado')"><h2>Guardados</h2></button>
         <button class="tablinks" onclick="config()"><h2>Configuración</h2></button>
@@ -84,7 +124,8 @@ $lis=mysqli_query($conexion,$sql);
         <!-- Contenido de información de usuario -->
         <section class="usuario" id="usuario">
             
-            <h1 class="nombre"><?php echo $nombre; ?></h1>
+            <h1 class="nombreus" id="nombreus" style="display:none;"><?php echo $nombre; ?></h1>
+            <div class="espacioenblanco" id="espacioenblanco" style="display:block;"></div>
             <div class="imagen">
             <?php
             echo'
@@ -101,7 +142,9 @@ $lis=mysqli_query($conexion,$sql);
 
         <!-- Contenido de las pestaña !-->
             <section id="tabperfil" class="tabcontenido" >
+            <h1><?php echo $nombre; ?></h1>
                 <div class="bio">
+                    
                     <h2><?php echo $biografia; ?></h2>
                 </div>
                
@@ -238,9 +281,8 @@ $lis=mysqli_query($conexion,$sql);
                             <p>Verifica la nueva contraseña</p>
                             <input type="password" name="clavenueva2" id="clavenueva2" maxlength="12" minlength="8" required>
                         </span>
-                        <span>
-                            <button class="botonc" id="botonc" type="submit">Actualizar</button>
-                            </span>
+                        
+                            <input class="boton" value="Actualizar"id="boton" type="submit" style="height:3rem; margin-top: 2.5rem;">
                         ';
                     ?>
                     </form>
@@ -268,9 +310,16 @@ $lis=mysqli_query($conexion,$sql);
             
             document.getElementById(tabId).style.display = "block";
             document.getElementById('grid').style.display = 'grid';
+            document.getElementById('nombreus').style.display = 'block';
+            document.getElementById('espacioenblanco').style.display = 'none';
             evt.currentTarget.className += " active";
         }
 
+        function abrirperfil(evt, tabId){
+            abrirTab(evt, tabId);
+            document.getElementById('nombreus').style.display = 'none';
+            document.getElementById('espacioenblanco').style.display = 'block';
+        }
         function config(){
              // Ocultar informacion de usuario
             document.getElementById('grid').style.display = 'none';
