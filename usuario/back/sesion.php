@@ -1,4 +1,9 @@
 <?php
     session_start();
-    $sesion=$_SESSION["sesion"];
+    if(!isset($_SESSION["sesion"])){ 
+        $sesion='';
+
+    }else{
+        $sesion=$_SESSION["sesion"];
+    }
 ?>

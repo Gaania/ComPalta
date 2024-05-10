@@ -55,8 +55,8 @@ if (isset($_GET)){
     }
 
     //guardar registro
-    $query="INSERT INTO `usuario`(`nombreUsuario`, `clave`, `correo`, `fechaCreacion`, `tipoUsuarioID`) 
-    VALUES ('$nombre','$clave','$correo','$fechacreacion','2')";
+    $query="INSERT INTO `usuario`(`nombreUsuario`, `clave`, `correo`,  `imagen`, `fechaCreacion`, `tipoUsuarioID`) 
+    VALUES ('$nombre','$clave','$correo','img/usuarioestandar.png','$fechacreacion','2')";
     $res=mysqli_query($conexion, $query);
     if (!$res){
         echo "<script>alert('ERROR: No se guardó su usuario. Vuelva a intentar.');history.go(-1);</script>";
