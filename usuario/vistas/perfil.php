@@ -7,18 +7,15 @@ include '../../BDD/conexion.php';
 
 //metodo get para acceder a algún perfil
 //si la variable get coincide con la variable de sesion, se activa la configuración
-if (isset($_GET['usuario'])){
-    if($_GET['usuario']==$sesion){
-        echo 'funciona';
-    }else{
-        echo 'nofunciona';
-    }
+if (!isset($_GET['usuario'])){
+    echo "<script>alert('Ha ocurrido un error. Vuelva a intentar.');history.go(-1);</script>";
+    exit();
 }
-
+$nombre=$_GET['usuario'];
 //obtener todos los datos de la bdd
-$sql = "SELECT nombreUsuario, imagen, fechaCreacion, biografia, correo
+$sql = "SELECT usuarioID, nombreUsuario, imagen, fechaCreacion, biografia, correo
     FROM usuario where 
-    usuarioID=1";
+    nombreUsuario='$nombre'";
     $usuario= mysqli_query($conexion, $sql);
     if (!$usuario){
         echo "<script>alert('Ha ocurrido un error. Vuelva a intentar.');history.go(-1);</script>";
@@ -27,31 +24,30 @@ $sql = "SELECT nombreUsuario, imagen, fechaCreacion, biografia, correo
 
     $valores=mysqli_fetch_assoc($usuario);
 
-    $nombre= wordwrap($valores['nombreUsuario']);
+    $ID=$valores['usuarioID'];
+    $nombre=mb_convert_encoding($valores['nombreUsuario'], 'UTF-8', 'ISO-8859-1');
     $fechacreacion= date("d-m-Y",strtotime($valores['fechaCreacion'])); 
     $imagen= $valores['imagen'];
     $correo= $valores['correo'];
     if($valores['biografia']){
-        $biografia= wordwrap($valores['biografia']);
+        $biografia= mb_convert_encoding($valores['biografia'], 'UTF-8', 'ISO-8859-1');
     }else{
-        $biografia='';
+        $biografia='Esta persona no tiene una biografía';
     }
     
 //obtener datos de opiniones
-$sql="SELECT `nombre`,`nombreComida`, `puntaje`, `comentario` 
+$sql="SELECT `nombre`, `puntaje`, `comentario` 
     FROM `puntaje` 
     inner join usuario 
     on puntaje.usuarioID=usuario.usuarioID
-    inner join comida
-    on puntaje.comidaID=comida.comidaID
     inner join restaurante
-    on comida.restauranteID=restaurante.restauranteID
-    WHERE usuario.usuarioID=4";
+    on puntaje.restauranteID=restaurante.restauranteID
+    WHERE usuario.usuarioID=$ID";
     $datos= mysqli_query($conexion,$sql);
 
 
 //obtener registros de listas del usuario
-$sql="SELECT `listaID`, `nombreLista` FROM `lista` WHERE usuarioID=4";
+$sql="SELECT `listaID`, `nombreLista` FROM `lista` WHERE usuarioID=$ID";
 $lis=mysqli_query($conexion,$sql);
 
 
@@ -67,6 +63,70 @@ $lis=mysqli_query($conexion,$sql);
     <title>Perfil</title>
 </head>
 <body>
+
+<!-- Funciones javascript !-->
+<script>
+        function abrirTab(evt, tabId) {
+            var i, tabcontent, tablinks;
+            
+            // Ocultar todos los elementos con clase "tabcontenido"
+            tabcontent = document.getElementsByClassName("tabcontenido");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+    
+            // Remover la clase "active" de todos los elementos con clase "tablinks"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+    
+            // Mostrar el contenido de la pestaña seleccionada y agregar la clase "active" al botón
+            
+            document.getElementById(tabId).style.display = "block";
+            document.getElementById('grid').style.display = 'grid';
+            document.getElementById('nombreus').style.display = 'block';
+            document.getElementById('espacioenblanco').style.display = 'none';
+            evt.currentTarget.className += " active";
+        }
+
+        function abrirperfil(evt, tabId){
+            abrirTab(evt, tabId);
+            document.getElementById('nombreus').style.display = 'none';
+            document.getElementById('espacioenblanco').style.display = 'block';
+        }
+
+        window.addEventListener('load', function() {
+            var sesion = <?php echo $sesion; ?>;
+            var usuarioid = <?php echo $ID; ?>;
+            
+            if(!sesion){
+                document.getElementById('config').style.display = 'none';
+
+            }else{
+                if(sesion===usuarioid){
+                   document.getElementById('config').style.display = 'inline-block';
+                }else{
+                    document.getElementById('config').style.display = 'none';
+                }
+            }
+            
+        }) 
+
+        function config(){
+             // Ocultar informacion de usuario
+            document.getElementById('grid').style.display = 'none';
+            document.getElementById('configuracion').style.display = 'grid';
+        }
+
+        function ingresarclave(){
+            document.getElementById('inputclave').style.display = 'flex';
+            document.getElementById('enviar').style.display = 'block';
+            document.getElementById('actualizar').style.display = 'none';
+        }
+    </script>
+
+    <script src="../back/script.js"></script>
 
     <!--nav!-->
     <nav class="nav">
@@ -116,7 +176,7 @@ $lis=mysqli_query($conexion,$sql);
         <button class="tablinks" onclick="abrirperfil(event, 'tabperfil')"><h2>Perfil</h2></button>
         <button class="tablinks" onclick="abrirTab(event, 'tabopinion')"><h2>Opiniones</h2></button>
         <button class="tablinks" onclick="abrirTab(event, 'tabguardado')"><h2>Guardados</h2></button>
-        <button class="tablinks" onclick="config()"><h2>Configuración</h2></button>
+        <button class="tablinks" id="config" onclick="config()" style="display:none;"><h2>Configuración</h2></button>
     </section>
        
     <!--inicio grid-->
@@ -156,12 +216,10 @@ $lis=mysqli_query($conexion,$sql);
                     <?php
                     if($datos){
                         while ($opinion=mysqli_fetch_assoc($datos)){
-                            $comidanombre= $opinion['nombreComida'];
                             $restaurantenombre= $opinion['nombre'];
                             $puntaje=$opinion['puntaje'];
                             $comentario=$opinion['comentario'];
                             echo '<div class="caja">
-                            <p>'.$comidanombre.'</p>
                             <p>'.$restaurantenombre.'</p> 
                             <p>'.$puntaje.'</p><p>'.$comentario.'</p>
                             </div>';
@@ -185,7 +243,7 @@ $lis=mysqli_query($conexion,$sql);
                                 $ID= $lista['listaID'];
                                 $nombre= $lista['nombreLista'];
                                 
-                                echo '<p>'.$nombre.'</p>';
+                                echo '<p>'.mb_convert_encoding($nombre, 'UTF-8', 'ISO-8859-1').'</p>';
                                 //obtener guardados segun su lista
                                 $sql="SELECT `nombre`
                                 FROM `guardado` 
@@ -196,7 +254,7 @@ $lis=mysqli_query($conexion,$sql);
                                 if($guar){
                                     while($guardados=mysqli_fetch_assoc($guar)){    
                                         echo '<div class="caja">
-                                            <span>'.$guardados['nombre'].'</span>
+                                            <span>'.mb_convert_encoding($$guardados['nombre'], 'UTF-8', 'ISO-8859-1').'</span>
                                         </div>';
                                     }
                                 }
@@ -211,7 +269,7 @@ $lis=mysqli_query($conexion,$sql);
         </div>
 
         <!-- Contenido de configuración !-->
-        <section class="configuracion">
+        <section class="configuracion" id="configuracion"style="display:none;">
             <div class="formularioperfil">
                 <h1>Perfil público</h1>
                 <form action="../back/configuraciones.php" method="post">
@@ -269,70 +327,29 @@ $lis=mysqli_query($conexion,$sql);
                     <?php
                         echo'
                         <h2>Cambiar contraseña</h2>
-                        <span>
+                        
                             <p>Contraseña actual</p>
                             <input type="password" name="clave" id="clave" maxlength="12" minlength="8" required>
-                        </span>
-                        <span>
+                        
                             <p>Nueva contraseña</p>
                             <input type="password" name="clavenueva" id="clavenueva" maxlength="12" minlength="8" required>
-                        </span>
-                        <span>
+                        
                             <p>Verifica la nueva contraseña</p>
                             <input type="password" name="clavenueva2" id="clavenueva2" maxlength="12" minlength="8" required>
-                        </span>
                         
-                            <input class="boton" value="Actualizar"id="boton" type="submit" style="height:3rem; margin-top: 2.5rem;">
+                        
+                            <input class="boton" value="Actualizar" id="boton" type="submit" style="width: 100%;height: 2rem;margin-top: 1REM;border-radius: 8px;">
                         ';
                     ?>
                     </form>
                 </div>
+                <div class="cerrarsesion">
+                    <a href="../back/cerrarsesion.php"><h3>Cerrar sesion</h3></a>
+                    </div>
         </section>
         
     </div>
-    <script>
-        function abrirTab(evt, tabId) {
-            var i, tabcontent, tablinks;
-            
-            // Ocultar todos los elementos con clase "tabcontenido"
-            tabcontent = document.getElementsByClassName("tabcontenido");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
     
-            // Remover la clase "active" de todos los elementos con clase "tablinks"
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-    
-            // Mostrar el contenido de la pestaña seleccionada y agregar la clase "active" al botón
-            
-            document.getElementById(tabId).style.display = "block";
-            document.getElementById('grid').style.display = 'grid';
-            document.getElementById('nombreus').style.display = 'block';
-            document.getElementById('espacioenblanco').style.display = 'none';
-            evt.currentTarget.className += " active";
-        }
-
-        function abrirperfil(evt, tabId){
-            abrirTab(evt, tabId);
-            document.getElementById('nombreus').style.display = 'none';
-            document.getElementById('espacioenblanco').style.display = 'block';
-        }
-        function config(){
-             // Ocultar informacion de usuario
-            document.getElementById('grid').style.display = 'none';
-        }
-
-        function ingresarclave(){
-            document.getElementById('inputclave').style.display = 'flex';
-            document.getElementById('enviar').style.display = 'block';
-            document.getElementById('actualizar').style.display = 'none';
-        }
-    </script>
-
-    <script src="../back/script.js"></script>
 
 </body>
 </html>

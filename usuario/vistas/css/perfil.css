@@ -1,12 +1,10 @@
 body{
-    overflow-y: hidden;
+    overflow-y: scroll;
     overflow-x: hidden;
     font-size: 12px;
     height: 100vh;
     width: 100vw;
     background-color: #50654c;
-background-image: linear-gradient(62deg, #50654c 30%, #b1b782 100%);
-
     color: #f4efef;
 
 }
@@ -17,7 +15,8 @@ background-image: linear-gradient(62deg, #50654c 30%, #b1b782 100%);
     display: grid;
     grid-template-rows:auto;
     grid-template-columns: 20% auto;
-
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 /* Tab */
@@ -252,6 +251,8 @@ background-image: linear-gradient(62deg, #50654c 30%, #b1b782 100%);
 /* configuracion */
 .configuracion{
     display: grid;
+    overflow-y:hidden;
+    overflow-x: hidden;
     grid-template-rows: auto auto;
     padding:1rem;
     margin-top: 1rem;
@@ -259,6 +260,7 @@ background-image: linear-gradient(62deg, #50654c 30%, #b1b782 100%);
     font-weight: bold;
 }
     .formularioperfil{
+        margin-top: 2.5rem;
         display:grid;
         height: 60%;
         grid-template-columns: auto 50%;
@@ -274,6 +276,7 @@ background-image: linear-gradient(62deg, #50654c 30%, #b1b782 100%);
             font-size: 2rem;
             line-height: 0.5;
             color:#f4efef;
+            text-align: center;
             
         }
 
@@ -414,32 +417,33 @@ background-image: linear-gradient(62deg, #50654c 30%, #b1b782 100%);
         .botones{
             width: 100%;
         }
-            .boton{
-                background-color: #ffffff;
-                border: 1px inset #0f4020;
-                text-align: center;
-                width: 10rem;
-                height: 2rem;
-                margin: 0;
-                border-radius: 8px;
-
-            }
-
+        .boton{
+            background-color: #ffffff;
+            border: 1px inset #0f4020;
+            text-align: center;
+            width: 10rem;
+            height: 2rem;
+            margin: 0;
+            border-radius: 8px;
+    
+        }
+    
 
 /* seccion clave */
-    .formularioclave form{
-    width: 90%;
-    margin:0rem 5rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-content: center;
-    align-items: stretch;
+ .formularioclave form{
+    margin-top: 7rem;
+        width: 45rem;
+        text-align: center;
+            padding-left: 5rem;
+            display: flex;
+            justify-content: center;
+            align-content: flex-start;
+            flex-direction: row;
+            flex-wrap: wrap;
     }
     .formularioclave h2{
         width: 100%;
-        line-height: 1;
+        line-height: 0;
         color:#f4efef;
     }
     .formularioclave span{
@@ -451,17 +455,39 @@ background-image: linear-gradient(62deg, #50654c 30%, #b1b782 100%);
 
     .formularioclave p{
         line-height: 0.5;
+        margin-top: 1.7REM;
+        text-align: left;
+                color:#f4efef;
+                width: 50%;
+                font-size: 1rem;
+                font-weight: 500;
     }
     
-    input #boton{
-        height: 10rem;
-        margin-top: 3rem;
-    }
+    
     .formularioclave input{
-        border: 1px inset #0f4020;
-        height: 100%;
-        background-color: #ffffff;
-        border-radius: 10%;
-        transition: 0.2s ease-in-out;
+                margin: 1REM 0rem; 
+                background-color: #ffffff;
+                color:#252323;
+                border: 1px inset #0f4020;
+                border-radius: 5%;
+                height: 1.8rem;
+                width: 50%;
+                transition: 0.2s ease-in-out;
 
+    }
+
+.cerrarsesion{
+    margin-top: 7rem;
+    padding:0 5rem;
+    
+}
+    .cerrarsesion h3, .cerrarsesion a{
+        color:#8f0000;
+        height: 2.5rem;
+        width: 100%;
+        background-color: #ffffff;
+        border: 1px inset #0f4020;
+        text-align: center;
+        border-radius: 8px;
+        padding-top: 0.5rem;
     }

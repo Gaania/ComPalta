@@ -28,7 +28,7 @@ if(isset($_GET)){
 
             session_start();
             $_SESSION["sesion"] = $usuario['usuarioID'];
-            echo "<script>alert('Has iniciado sesión');window.location='../vistas/perfil.php';</script>";
+            echo "<script>alert('Has iniciado sesión');history.go(-2);</script>";
             exit();
         }else{
             echo "<script>alert('ERROR: El correo o contraseña son incorrectos.');history.go(-1);</script>";

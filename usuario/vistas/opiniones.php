@@ -9,8 +9,7 @@ include '../../BDD/conexion.php';
 $query="SELECT `nombreUsuario`, `puntaje`, `comentario` 
 FROM `puntaje` 
 inner join usuario on puntaje.usuarioID=usuario.usuarioID 
-inner join restaurante on puntaje.restauranteID=restaurante.restauranteID 
-WHERE puntaje.restauranteID=1";
+WHERE restauranteID=1";
 $op=mysqli_query($conexion,$query);
 ?>
 <head>
@@ -19,12 +18,21 @@ $op=mysqli_query($conexion,$query);
 <?php
     
 ?>
-<!--Botón para escribir una opinion!-->
+<section class="botonesopiniones">
+    <!--Botón para escribir una opinion!-->
     <button id="comentar" onclick="sesioniniciada()">Comentar</button>
 
-    <!-- De tener la sesion iniciada, aparece el form !-->
-    <div id="enviaropinion" class="enviaropinion" style="display:none;">
-        <H2>Haz un comentario</H2>
+    <!-- De no tener la sesion iniciada, botón para login !-->
+    <div id="iniciarsesion" class="iniciarsesion" style="display:none;">
+        <a href="login.html"><p>Iniciar Sesión</p></a>
+    </div>
+</section>
+     <!-- De tener la sesion iniciada, aparece el form !-->
+     <div id="enviaropinion" class="enviaropinion" style="display:none;">
+        <section class ="primeralinea">
+            <H2>Haz un comentario</H2>
+            <button id="cerrar" onclick="cerrarventana()">X</button>
+        </section>
             <form action="../back/opinion.php" method="post">
                 <input type="text" name="comentario" id="comentario" maxlength="200" minlength="50" required>
                 <!-- Estrellas !-->
@@ -40,13 +48,10 @@ $op=mysqli_query($conexion,$query);
                     <input value="1" name="puntaje" id="star1" type="radio">
                     <label title="text" for="star1"></label>
                 </div>
+                <input type="hidden" name="idrestaurante" id="idrestaurante" value="1" required>
+
                     <input type="submit" id="enviar" >
             </form>
-    </div>
-
-    <!-- De no tener la sesion iniciada, botón para login !-->
-    <div id="iniciarsesion" class="iniciarsesion" style="display:none;">
-        INICIE SESION
     </div>
 
 <!-- Contenedor de opiniones, lista !-->
@@ -54,38 +59,50 @@ $op=mysqli_query($conexion,$query);
     <h2>Comentarios</h2>
     <?php
     if($op){
-        while($opinion=mysqli_fetch_assoc($op)){
-            
-            $nombreusuario= $opinion['nombreUsuario'];
-            $puntaje=$opinion['puntaje'];
-            $comentario=utf8_encode($opinion['comentario']);
-            
-            echo'
-            <section class="opinion">
-                <div class="puntaje">';
-                    for($a=0;$a<$puntaje;$a++){
-                        echo'<span class="estrellas"></span>';
-                    }
+        $num=mysqli_num_rows($op);
+        
+        for ($n=0;$n<$num;$n++){
+            $opinion=mysqli_fetch_assoc($op);
+                $nombreusuario= mb_convert_encoding($opinion['nombreUsuario'], 'UTF-8', 'ISO-8859-1');
+                $puntaje=$opinion['puntaje'];
+                $comentario=mb_convert_encoding($opinion['comentario'], 'UTF-8', 'ISO-8859-1');
+                
                 echo'
-                </div>
-                <p class="nombre"><a href="perfil.php?us='.$nombreusuario.'" id="link">'.$nombreusuario.'</a></p>
-                <p class="comentario">'.$comentario.'</p>
-            </section>
-            ';
+                <section class="opinion">
+                    <div class="puntaje">';
+                        for($a=0;$a<$puntaje;$a++){
+                            echo'<span class="estrellas"></span>';
+                        }
+                    echo'
+                    </div>
+                    <p class="nombre"><a href="perfil.php?usuario='.$nombreusuario.'" id="link">'.$nombreusuario.'</a></p>
+                    <p class="comentario">'.$comentario.'</p>
+                </section>
+                ';
+            
         }
     }
     ?>
 </div>
 
 <script>
-            function sesioniniciada(){
-                var sesion="<?php echo $sesion;?>";
-                if(sesion!=''){
-                    document.getElementById('enviaropinion').style.display = 'block';
-                    document.getElementById('iniciarsesion').style.display = 'none';
-                }else{
-                    document.getElementById('enviaropinion').style.display = 'none';
-                    document.getElementById('iniciarsesion').style.display = 'block';
-                }
-            }
+
+    /* Mostrar para comentar o iniciar sesión según $_SESSION */
+    function sesioniniciada(){
+        var sesion="<?php echo $sesion;?>";
+        if(sesion!=''){
+            document.getElementById('enviaropinion').style.display = 'block';
+            document.getElementById('iniciarsesion').style.display = 'none';
+        }else{
+            document.getElementById('enviaropinion').style.display = 'none';
+            document.getElementById('iniciarsesion').style.display = 'block';
+        }
+    }
+
+    function cerrarventana(){
+        document.getElementById('enviaropinion').style.display = 'none';
+    }
+    /* Cerrar la ventana de comentario si se clickea afuera */
+
+    
 </script>
