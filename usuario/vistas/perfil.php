@@ -42,12 +42,12 @@ $sql="SELECT `nombre`, `puntaje`, `comentario`
     on puntaje.usuarioID=usuario.usuarioID
     inner join restaurante
     on puntaje.restauranteID=restaurante.restauranteID
-    WHERE usuario.usuarioID=$ID";
+    WHERE usuario.usuarioID='$ID'";
     $datos= mysqli_query($conexion,$sql);
 
 
 //obtener registros de listas del usuario
-$sql="SELECT `listaID`, `nombreLista` FROM `lista` WHERE usuarioID=$ID";
+$sql="SELECT `listaID`, `nombreLista` FROM `lista` WHERE usuarioID='$ID'";
 $lis=mysqli_query($conexion,$sql);
 
 
@@ -249,12 +249,15 @@ $lis=mysqli_query($conexion,$sql);
                                 FROM `guardado` 
                                 inner join restaurante
                                 on guardado.restauranteID=restaurante.restauranteID
-                                WHERE listaID=$ID";
+                                WHERE listaID='$ID'";
                                 $guar=mysqli_query($conexion,$sql);
                                 if($guar){
-                                    while($guardados=mysqli_fetch_assoc($guar)){    
+                                    $reg=mysqli_num_rows($guar);
+                                    echo $reg;
+                                    for($n=0;$n<$reg;$n++){
+                                    $guardados=mysqli_fetch_assoc($guar);
                                         echo '<div class="caja">
-                                            <span>'.mb_convert_encoding($$guardados['nombre'], 'UTF-8', 'ISO-8859-1').'</span>
+                                            <span>'.mb_convert_encoding($guardados['nombre'], 'UTF-8', 'ISO-8859-1').'</span>
                                         </div>';
                                     }
                                 }
