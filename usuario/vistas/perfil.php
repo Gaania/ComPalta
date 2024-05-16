@@ -220,8 +220,8 @@ $lis=mysqli_query($conexion,$sql);
                             $puntaje=$opinion['puntaje'];
                             $comentario=$opinion['comentario'];
                             echo '<div class="caja">
-                            <p>'.$restaurantenombre.'</p> 
-                            <p>'.$puntaje.'</p><p>'.$comentario.'</p>
+                            <p id="restnombre"><a href="">'.$restaurantenombre.'</a></p> 
+                            <p id="puntaje">'.$puntaje.'</p><p id="comentario">'.$comentario.'</p>
                             </div>';
                         }
                         
@@ -240,7 +240,7 @@ $lis=mysqli_query($conexion,$sql);
                             //mientras hayan registros
                             while($lista=mysqli_fetch_assoc($lis)){
                                 // info de lista
-                                $ID= $lista['listaID'];
+                                $listaID= $lista['listaID'];
                                 $nombre= $lista['nombreLista'];
                                 
                                 echo '<p>'.mb_convert_encoding($nombre, 'UTF-8', 'ISO-8859-1').'</p>';
@@ -249,13 +249,10 @@ $lis=mysqli_query($conexion,$sql);
                                 FROM `guardado` 
                                 inner join restaurante
                                 on guardado.restauranteID=restaurante.restauranteID
-                                WHERE listaID='$ID'";
+                                WHERE listaID='$listaID' AND usuarioID='$ID'";
                                 $guar=mysqli_query($conexion,$sql);
                                 if($guar){
-                                    $reg=mysqli_num_rows($guar);
-                                    echo $reg;
-                                    for($n=0;$n<$reg;$n++){
-                                    $guardados=mysqli_fetch_assoc($guar);
+                                    while($guardados=mysqli_fetch_assoc($guar)){
                                         echo '<div class="caja">
                                             <span>'.mb_convert_encoding($guardados['nombre'], 'UTF-8', 'ISO-8859-1').'</span>
                                         </div>';
