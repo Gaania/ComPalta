@@ -157,7 +157,7 @@ body{
     #tabopinion .listado{
         background-color: #f3eded;
         width: 80%;
-        height: 90%;
+        height: 80%;
         border: 1px inset #0f4020;
         box-shadow: 10px 10px 36px -4px rgba(243, 243, 243, 0.23);
         overflow-y: auto;
@@ -173,26 +173,37 @@ body{
 
     #tabopinion .caja{
         width:100%;
-        height: 10%;
+        height: 7rem;
         background-color: #0c4922;
         margin: 1rem;
-        border-radius: 1%;
+        border-radius: 2%;
         display: grid;
         grid-template-columns: auto;
-        grid-template-rows: 10% 15% 10% auto;
-        justify-content: start;
+        grid-template-rows: 15% 20% 65%;
+        align-content:space-between;
+        align-items: center;
+        padding: 1rem;
     }
-            #tabopinion .caja p{
-                    line-height: 1;
+        #tabopinion .caja p{
+             line-height: 1;
         }
         
-        .caja #restnombre{
-            font-size: 1rem;
+        .caja #restnombre, #restnombre a{
+            font-size: 1.1rem;
+            color:#f4efef;
         }
-        .caja #puntaje{
-            
-        }
+        
+            .estrellas:before{
+               
+                content: '★';
+                color: #F19E38;
+                font-size: 1.2rem;
+            }
+
         .caja #comentario{
+            font-size: 1rem;
+            align-self: start;
+            color:#f4efef;
 
         }
 
@@ -225,22 +236,26 @@ body{
         align-content:flex-start;
     }
     #tabguardado .caja{
-        
+        border: 1px inset #0f4020;
+        box-shadow: 10px 10px 36px -4px rgba(243, 243, 243, 0.23);
         margin: 1rem 1rem;
-        border-radius: 1%;
-    
+        border-radius: 8%;
+        background-color: #0c4922;
         width: 20%;
         height: 20%;
         display: flex;
         align-items: center;
         
     }
-        .caja span{
+        .caja span, .caja span a{
             width: 100%;
             text-align: center;
+            background-color: #0c4922;
+            color: #f4efef;
+
         }
 
-    #tabguardado .listado p{
+    #tabguardado .listado #listaa{
         width: 100%;
         height: 1rem;
         font-size: 1.5rem;

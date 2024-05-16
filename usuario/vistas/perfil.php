@@ -221,7 +221,12 @@ $lis=mysqli_query($conexion,$sql);
                             $comentario=$opinion['comentario'];
                             echo '<div class="caja">
                             <p id="restnombre"><a href="">'.$restaurantenombre.'</a></p> 
-                            <p id="puntaje">'.$puntaje.'</p><p id="comentario">'.$comentario.'</p>
+                            <p id="puntaje">';
+                                for($a=0;$a<$puntaje;$a++){
+                                    echo'<span class="estrellas"></span>';
+                                }
+                        echo'
+                        </p><p id="comentario">'.$comentario.'</p>
                             </div>';
                         }
                         
@@ -243,7 +248,7 @@ $lis=mysqli_query($conexion,$sql);
                                 $listaID= $lista['listaID'];
                                 $nombre= $lista['nombreLista'];
                                 
-                                echo '<p>'.mb_convert_encoding($nombre, 'UTF-8', 'ISO-8859-1').'</p>';
+                                echo '<p id="listaa">'.mb_convert_encoding($nombre, 'UTF-8', 'ISO-8859-1').'</p>';
                                 //obtener guardados segun su lista
                                 $sql="SELECT `nombre`
                                 FROM `guardado` 
@@ -254,7 +259,7 @@ $lis=mysqli_query($conexion,$sql);
                                 if($guar){
                                     while($guardados=mysqli_fetch_assoc($guar)){
                                         echo '<div class="caja">
-                                            <span>'.mb_convert_encoding($guardados['nombre'], 'UTF-8', 'ISO-8859-1').'</span>
+                                            <span><a href="" ><p>'.mb_convert_encoding($guardados['nombre'], 'UTF-8', 'ISO-8859-1').'<p></a></span>
                                         </div>';
                                     }
                                 }
